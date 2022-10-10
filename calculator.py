@@ -1,6 +1,3 @@
-# Import queue
-from queue import Queue
-
 digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 operators = ['+', '-', '*']
 
@@ -12,10 +9,10 @@ def check_validity(list_equation):
         return False
 
     for i in range(len(list_equation)-1):
-        if list_equation[i].isnumeric() and list_equation[i+1].isnumeric():
+        # Double operator check
+        if list_equation[i] in operators and list_equation[i+1] in operators:
             return False
-        elif list_equation[i] in operators and list_equation[i+1] in operators:
-            return False
+        # Check for invalid character (not digits or operators)
         elif not list_equation[i].strip('-').isnumeric() and not list_equation[i] in operators:
             return False
     return True
@@ -23,6 +20,7 @@ def check_validity(list_equation):
 
 # Function that converts user input into a list of integers and operators
 def convert_string_to_list(user_input):
+    # Instantiates new string to be converted with delimiting space characters
     new_string = ""
     digit_last = False
     for i in range(len(user_input)):
@@ -30,8 +28,8 @@ def convert_string_to_list(user_input):
         if user_input[i] in digits:
             new_string += user_input[i]
             digit_last = True
-        # Adds a space before an after any operator for easy conversion
         elif user_input[i] in operators:
+            # Negative number or subtraction operation check
             if user_input[i] == '-':
                 if digit_last:
                     new_string += ' ' + user_input[i] + ' '
@@ -44,9 +42,11 @@ def convert_string_to_list(user_input):
                             break
                         elif user_input[j] in operators:
                             return None
+            # Adds space before and after operator for delimiting
             else:
                 new_string += ' ' + user_input[i] + ' '
                 digit_last = False
+        # Double operand check
         elif user_input[i] == ' ':
             for j in range(i+1, len(user_input)):
                 if user_input[j] in digits:
