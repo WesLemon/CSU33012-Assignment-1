@@ -64,8 +64,12 @@ def convert_string_to_list(user_input):
     return new_string.split()
 
 
-def main():
+def calculate():
+    pass
+    # TODO
 
+
+def main():
     calculator = calculator_gui.GUI()
 
 

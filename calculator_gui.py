@@ -44,7 +44,7 @@ class GUI:
         btn_mul = tk.Button(self.root, text="*", command=lambda: self.add_to_calculation('*'), width=5,
                             font=("Arial", 14))
         btn_mul.grid(row=4, column=4)
-        btn_equals = tk.Button(self.root, text="=", command=self.calculate, width=11,
+        btn_equals = tk.Button(self.root, text="=", command=calculator.calculate, width=11,
                                font=("Arial", 14))
         btn_equals.grid(row=5, column=3, columnspan=2)
         btn_clear = tk.Button(self.root, text="C", command=self.clear_field, width=5, font=("Arial", 14))
