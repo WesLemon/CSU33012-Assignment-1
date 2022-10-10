@@ -1,3 +1,5 @@
+from queue import Queue
+
 digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 operators = ['+', '-', '*']
 
@@ -16,7 +18,6 @@ def check_validity(list_equation):
         elif not list_equation[i].strip('-').isnumeric() and not list_equation[i] in operators:
             return False
     return True
-
 
 
 # Function that converts user input into a list of integers and operators
@@ -103,22 +104,25 @@ def calculate(toCalculate):
         #   either an operand or an operator
         element = q.get()
 
-        # Dealing with the 2 possible scenarios, an operator or an operand dequeued
-        #   if the operator is a + add the operands, else it must be a minus so subtract them
-        #   and add them to the result
-        element2 = q.get()
-        if element in operators:
-            if element == "+":
-                result += element2
+        # Checking for single element queues
+        if not q.empty():
+            # Dealing with the 2 other possible scenarios, an operator or an operand dequeued
+            #   if the operator is a + add the operands, else it must be a minus so subtract them
+            #   and add them to the result
+            element2 = q.get()
+            if element in operators:
+                if element == "+":
+                    result += element2
+                else:
+                    result -= element2
             else:
-                result -= element2
+                element3 = q.get()
+                if element2 == "+":
+                    result += (element + element3)
+                else:
+                    result += (element - element3)
         else:
-            element3 = q.get()
-            if element2 == "+":
-                result += (element + element3)
-            else:
-                result += (element - element3)
-
+            result = element
     return result
 
 
@@ -137,6 +141,7 @@ def main():
 
         else:
             print('valid')
+            print("result = " + str(calculate(expression)))
 
 
 if __name__ == "__main__":
