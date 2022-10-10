@@ -33,7 +33,7 @@ def calculate(toCalculate):
     i = 0
     while i < len(toCalculate):
         # if the element is an operator put it on the queue
-        if toCalculate[i] not in digits:
+        if toCalculate[i] in operators:
             q.put(toCalculate[i])
 
         # else it must be an operand so cast it as an int and put it on the stack
@@ -83,11 +83,11 @@ def main():
         valid = check_validity(expression)
 
         if not valid:
-            print('Error: Invalid string.')
+        print('Error: Invalid string.')
 
         else:
-            print('valid')
-            print("result = " + str(calculate(expression)))
+        print('valid')
+        print("result = " + str(calculate(expression)))
 
 
 if __name__ == "__main__":
