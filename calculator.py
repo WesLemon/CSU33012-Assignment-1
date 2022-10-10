@@ -56,6 +56,8 @@ def convert_string_to_list(user_input):
                         break
                 elif user_input[j] in operators:
                     break
+        else:
+            return None
     # Converts string to list, delimited by spaces
     return new_string.split()
 
