@@ -58,20 +58,25 @@ def calculate(toCalculate):
     result = 0
 
     while not q.empty():
-        # while the FIFO queue isn't empty get the first 3 elements which will be
-        #   1. Operand, 2. Operator, 3. Operand
-        operand1 = q.get()
-        operator = q.get()
-        operand2 = q.get()
+        # while the FIFO queue isn't empty get the first elements which will be
+        #   either an operand or an operator
+        element = q.get()
 
-        # if the operator is a + add the operands, else it must be a minus so subtract them
-        if operator == "+":
-            operand1 += operand2
+        # Dealing with the 2 possible scenarios, an operator or an operand dequeued
+        #   if the operator is a + add the operands, else it must be a minus so subtract them
+        #   and add them to the result
+        element2 = q.get()
+        if element in operators:
+            if element == "+":
+                result += element2
+            else:
+                result -= element2
         else:
-            operand1 -= operand2
-
-        # add the result of the operation to the total result
-        result += operand1
+            element3 = q.get()
+            if element2 == "+":
+                result += (element + element3)
+            else:
+                result += (element - element3)
 
     return result
 
