@@ -4,13 +4,15 @@ import unittest
 
 class TestMethods(unittest.TestCase):
 
-    def test_input_validity(self):
-        self.assertTrue(calculator.check_validity('3+4-12*197'), 'Valid string')
-        self.assertTrue(calculator.check_validity('23 + 13'), 'Valid string with spaces')
-        self.assertFalse(calculator.check_validity('text'), 'String with illegal character')
-        self.assertFalse(calculator.check_validity('-23-23'), 'String beginning with operator')
-        self.assertFalse(calculator.check_validity('43-34-'), 'String ending with operator')
-        self.assertFalse(calculator.check_validity('34++34'), 'String with double operators.')
+    def test_list_validity(self):
+        self.assertTrue(calculator.check_validity(['3', '+', '4', '-', '12', '*', '197']), 'Valid list')
+        self.assertTrue(calculator.check_validity(['23', '+', '13']), 'Valid list with spaces')
+        self.assertTrue(calculator.check_validity(['-23', '*', '5']), 'Valid list with negative number')
+        self.assertTrue(calculator.check_validity(['-29', '*', '-29']), 'Valid list with only negative numbers')
+        self.assertFalse(calculator.check_validity(['t', 'e', 'x', 't']), 'List with illegal characters')
+        self.assertFalse(calculator.check_validity(['+', '23', '-', '23']), 'List beginning with operator')
+        self.assertFalse(calculator.check_validity(['43', '-', '34', '-']), 'List ending with operator')
+        self.assertFalse(calculator.check_validity(['34', '+', '+', '34']), 'List with double operators.')
 
     def test_string_list_conversion(self):
 
