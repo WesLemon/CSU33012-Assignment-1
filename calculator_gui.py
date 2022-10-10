@@ -9,6 +9,7 @@ class GUI:
     # Initialises a new calculator GUI instance
     def __init__(self):
         self.root = tk.Tk()
+        self.root.title('Calculator')
         self.root.geometry("300x275")
         self.text_result = tk.Text(self.root, height=2, width=16, font=("Arial", 24))
         self.text_result.grid(columnspan=5)
