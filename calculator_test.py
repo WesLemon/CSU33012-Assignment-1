@@ -28,6 +28,16 @@ class TestMethods(unittest.TestCase):
                           'String with operator minus sign between two operators')
         self.assertIsNone(calculator.convert_string_to_list('text'), 'String with invalid characters')
 
+    def test_calculate(self):
+        self.assertEqual(calculator.calculate(['12', '+', '12']), 24, "2 operands with 1 + operator")
+        self.assertEqual(calculator.calculate(['12', '-', '12']), 0, "2 operands with 1 - operator")
+        self.assertEqual(calculator.calculate(['12', '*', '12']), 144, "2 operands with 1 * operator")
+        self.assertEqual(calculator.calculate(['12', '-', '12', '+', '12']), 12, "2 operands with a - and + operator")
+        self.assertEqual(calculator.calculate(['12', '*', '12', "-", '4', '+', '2']),
+                         142, "4 operands with *,+,- operators")
+        self.assertEqual(calculator.calculate(['12', '+', '12', "-", '4', '*', '2']),
+                         16, "4 operands with +,-,* operators")
+
 
 if __name__ == "__main__":
     unittest.main()
